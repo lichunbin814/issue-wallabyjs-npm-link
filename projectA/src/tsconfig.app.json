@@ -8,6 +8,7 @@
   "exclude": [
     "src/test.ts",
     "src/wallabyTest.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../node_modules/share-module/src/**/*.spec.ts"
   ]
 }
