@@ -6,7 +6,7 @@ To solove problem of wallabyjs
 
 https://github.com/wallabyjs/public/issues/1775
 
-## eproduce the problem by following these steps
+## reproduce the problem by following these steps
    1. git clone https://github.com/lichunbin814/issue-wallabyjs-npm-link.git
    2. cd projectA
    3. npm i 
