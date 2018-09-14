@@ -4,7 +4,7 @@
 
 To solove problem of wallabyjs
 
-https://github.com/wallabyjs/public/issues/1775
+https://github.com/wallabyjs/public/issues/1775 (OK)
 
 ## reproduce the problem by following these steps
    1. git clone https://github.com/lichunbin814/issue-wallabyjs-npm-link.git
