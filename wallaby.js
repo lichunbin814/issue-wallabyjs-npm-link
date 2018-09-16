@@ -3,8 +3,8 @@ var path = require('path');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 var compilerOptions = Object.assign(
-  require('./tsconfig.json').compilerOptions,
-  require('./src/tsconfig.spec.json').compilerOptions);
+  require('./projectA/tsconfig.json').compilerOptions,
+  require('./projectA/src/tsconfig.spec.json').compilerOptions);
 
 compilerOptions.module = 'CommonJs';
 
@@ -12,10 +12,10 @@ module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
-      'src/wallabyTest.js',
-      'src/**/*spec.js',
+      './projectA/src/wallabyTest.js',
+      './projectA/src/**/*spec.js',
        // added...
-      '../share-module/src/app/**/*.spec.js'
+      './share-module/src/app/**/*.spec.js'
     ],
 
     module: {
@@ -32,19 +32,19 @@ module.exports = function (wallaby) {
     },
 
     resolve: {
-      symlinks: false,
+      // symlinks: false,
       extensions: ['.js', '.ts'],
       modules: [
-        path.join(wallaby.projectCacheDir, 'src/app'),
-        path.join(wallaby.projectCacheDir, 'src'),
+        path.join(wallaby.projectCacheDir, './projectA/src/app'),
+        path.join(wallaby.projectCacheDir, './projectA/src'),
         // added...
-        path.join(wallaby.projectCacheDir, '../share-module/src/app'),
+        path.join(wallaby.projectCacheDir, './share-module/src/app'),
         'node_modules'
       ]
     },
     plugins: [
       new AngularCompilerPlugin({
-        tsConfigPath: './tsconfig.json',
+        tsConfigPath: './projectA/tsconfig.json',
         skipCodeGeneration: true
       })
     ],
@@ -58,21 +58,21 @@ module.exports = function (wallaby) {
 
   return {
     files: [
-      {pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
-      {pattern: 'src/**/*.d.ts', ignore: true},
-      {pattern: 'src/**/*spec.ts', ignore: true},
+      {pattern: './projectA/src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
+      {pattern: './projectA/src/**/*.d.ts', ignore: true},
+      {pattern: './projectA/src/**/*spec.ts', ignore: true},
        // added...
-      {pattern: '../share-module/src/app/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
-      {pattern: '../share-module/src/app/**/*.d.ts', ignore: true},
-      {pattern: '../share-module/src/app/**/*spec.ts', ignore: true}
+      {pattern: './share-module/src/app/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
+      {pattern: './share-module/src/app/**/*.d.ts', ignore: true},
+      {pattern: './share-module/src/app/**/*spec.ts', ignore: true}
     ],
 
     tests: [
-      {pattern: 'src/**/*spec.ts', load: false},
-      {pattern: 'src/**/*e2e-spec.ts', ignore: true},
+      {pattern: './projectA/src/**/*spec.ts', load: false},
+      {pattern: './projectA/src/**/*e2e-spec.ts', ignore: true},
        // added...
-      {pattern: '../share-module/src/app/**/*spec.ts', load: false},
-      {pattern: '../share-module/src/app/**/*e2e-spec.ts', ignore: true}
+      {pattern: './share-module/src/app/**/*spec.ts', load: false},
+      {pattern: './share-module/src/app/**/*e2e-spec.ts', ignore: true}
     ],
 
     testFramework: 'jasmine',
