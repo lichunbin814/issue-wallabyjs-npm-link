@@ -1,6 +1,5 @@
 var wallabyWebpack = require('wallaby-webpack');
 var path = require('path');
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 var compilerOptions = Object.assign(
   require('./projectA/tsconfig.json').compilerOptions,
@@ -12,10 +11,10 @@ module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
-      './projectA/src/wallabyTest.js',
-      './projectA/src/**/*spec.js',
+      'projectA/src/wallabyTest.js',
+      'projectA/src/**/*spec.js',
        // added...
-      './share-module/src/app/**/*.spec.js'
+      'share-module/src/app/**/*.spec.js'
     ],
 
     module: {
@@ -38,16 +37,10 @@ module.exports = function (wallaby) {
         path.join(wallaby.projectCacheDir, './projectA/src/app'),
         path.join(wallaby.projectCacheDir, './projectA/src'),
         // added...
-        path.join(wallaby.projectCacheDir, './share-module/src/app'),
+        path.join(wallaby.projectCacheDir),
         'node_modules'
       ]
     },
-    plugins: [
-      new AngularCompilerPlugin({
-        tsConfigPath: './projectA/tsconfig.json',
-        skipCodeGeneration: true
-      })
-    ],
     node: {
       fs: 'empty',
       net: 'empty',
