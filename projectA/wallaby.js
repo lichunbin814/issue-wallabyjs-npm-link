@@ -13,7 +13,9 @@ module.exports = function (wallaby) {
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
       'src/wallabyTest.js',
-      'src/**/*spec.js'
+      'src/**/*spec.js',
+       // added...
+      '../share-module/src/app/**/*.spec.js'
     ],
 
     module: {
@@ -35,17 +37,17 @@ module.exports = function (wallaby) {
       modules: [
         path.join(wallaby.projectCacheDir, 'src/app'),
         path.join(wallaby.projectCacheDir, 'src'),
+        // added...
+        path.join(wallaby.projectCacheDir, '../share-module/src/app'),
         'node_modules'
       ]
     },
-
     plugins: [
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
         skipCodeGeneration: true
       })
     ],
-
     node: {
       fs: 'empty',
       net: 'empty',
@@ -58,12 +60,19 @@ module.exports = function (wallaby) {
     files: [
       {pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
       {pattern: 'src/**/*.d.ts', ignore: true},
-      {pattern: 'src/**/*spec.ts', ignore: true}
+      {pattern: 'src/**/*spec.ts', ignore: true},
+       // added...
+      {pattern: '../share-module/src/app/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
+      {pattern: '../share-module/src/app/**/*.d.ts', ignore: true},
+      {pattern: '../share-module/src/app/**/*spec.ts', ignore: true}
     ],
 
     tests: [
       {pattern: 'src/**/*spec.ts', load: false},
-      {pattern: 'src/**/*e2e-spec.ts', ignore: true}
+      {pattern: 'src/**/*e2e-spec.ts', ignore: true},
+       // added...
+      {pattern: '../share-module/src/app/**/*spec.ts', load: false},
+      {pattern: '../share-module/src/app/**/*e2e-spec.ts', ignore: true}
     ],
 
     testFramework: 'jasmine',
